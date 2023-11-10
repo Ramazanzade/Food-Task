@@ -85,5 +85,53 @@ export default StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         marginTop: '3%'
+    },
+    flatlistview: {
+        backgroundColor: '#353842',
+        borderRadius: 10,
+        marginHorizontal: '5%',
+        marginTop: '5%',
+        marginRight: '10%'
+    },
+    viewimge: {
+        margin: '5%',
+    },
+    imge: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        alignItems: 'center',
+        alignSelf: 'center',
+        margin: '2%'
+    },
+    text3: {
+        textAlign: 'center',
+        marginTop: '4%',
+        fontSize: 15,
+        color: 'gray'
+    },
+    touc3: {
+
+    },
+    icon2: {
+        color: 'gray'
+    },
+    icon1: {
+        color: '#FF7269'
+    },
+    textview: {
+        alignSelf: 'center',
+        marginTop: '10%'
+    },
+    toucview1: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: '10%'
+    },
+    text4: {
+        fontSize: 20,
+        color: '#FF7269',
+        marginBottom:'10%'
     }
 })

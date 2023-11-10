@@ -1,11 +1,15 @@
-import { View, Text, TextInput, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Modal, ActivityIndicator , Image,FlatList} from 'react-native'
 import React, { useState } from 'react'
 import homecss from './homecss'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faFilter, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faXmark,faHeart , faBasketShopping} from '@fortawesome/free-solid-svg-icons';
 import SelectDropdown from 'react-native-select-dropdown'
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleBasket, toggleFavorite } from '../../Store/Feature/fooddataSlice';
 
-const Home = () => {
+const Home = ({navigation}:any) => {
+    const data = useSelector((state: any) => state.foodReducer.value)
+    const dispatch = useDispatch()
     const [search, setsearch] = useState('')
     const [modalVisible, setModalVisible] = useState(false);
     const [price, setprice] = useState('')
@@ -26,6 +30,45 @@ const Home = () => {
         }, 2000);
 
     };
+
+    const handle = (data: any) => {
+        dispatch(toggleFavorite(data.id))
+    }
+    const handle1 = (data: any) => {
+        dispatch(toggleBasket(data.id))
+    }
+    const renderitem = (data: any) => {
+        return (
+            <View  style={homecss.flatlistview}>
+                <View style={homecss.viewimge}>
+                    <Image 
+                    source={data.imge}
+                    style={homecss.imge}
+                    />
+                </View>
+                <Text style={homecss.text3}>{data.name}</Text>
+                <View style={homecss.toucview1}>
+                    <TouchableOpacity style={homecss.touc3} onPress={() => handle(data)}>
+                        <FontAwesomeIcon
+                            icon={faHeart}
+                            style={data.isFavorite ? homecss.icon1 :homecss.icon2}
+                            size={25}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={homecss.touc3} onPress={() => handle1(data)}>
+                        <FontAwesomeIcon
+                            icon={faBasketShopping}
+                            style={data.isBasket ? homecss.icon1 :homecss.icon2}
+                            size={25}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={homecss.textview}>
+                    <Text style={homecss.text4}>$ {data.price}</Text>
+                </View>
+            </View>
+        )
+    }
 
     return (
         <View style={homecss.view}>
@@ -95,6 +138,14 @@ const Home = () => {
                         </View>
                     </View>
                 </Modal>
+            </View>
+            <View>
+            <FlatList
+            data={data}
+            renderItem={({ item }) => renderitem(item)}
+            keyExtractor={(item: any) => item.id.toString()}
+            numColumns={2}
+          />
             </View>
         </View>
     )
