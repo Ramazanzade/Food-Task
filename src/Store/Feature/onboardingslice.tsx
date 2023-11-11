@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialStateValue = [
-    { id: 1, imge: require('../../Main/1.png'),  },
-    { id: 2, imge: require('../../Main/1.png'), },
-    { id: 3, imge: require('../../Main/1.png'), },
+    { id: 1, imge: require('../../Main/4-.png'),  },
+    { id: 2, imge: require('../../Main/5-.png'), },
+    { id: 3, imge: require('../../Main/6-.png'), },
 
 ]
 export const onboardingslice = createSlice({

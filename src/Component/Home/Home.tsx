@@ -6,6 +6,7 @@ import { faFilter, faXmark,faHeart , faBasketShopping} from '@fortawesome/free-s
 import SelectDropdown from 'react-native-select-dropdown'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBasket, toggleFavorite } from '../../Store/Feature/fooddataSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = ({navigation}:any) => {
     const data = useSelector((state: any) => state.foodReducer.value)
@@ -34,6 +35,7 @@ const Home = ({navigation}:any) => {
     const handle = (data: any) => {
         dispatch(toggleFavorite(data.id))
     }
+    
     const handle1 = (data: any) => {
         dispatch(toggleBasket(data.id))
     }

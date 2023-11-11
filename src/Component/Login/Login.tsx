@@ -58,7 +58,7 @@ const Login = ({ navigation }: any) => {
     };
 
     return (
-        <ScrollView style={[loginstayle.viewd, backgroundRed && { backgroundColor: '#b7b8bc' }]}>
+        <ScrollView style={[loginstayle.viewd, backgroundRed && { backgroundColor: '#2C2F38' }]}>
             <View style={loginstayle.view}>
                 <TouchableOpacity onPress={() => navigation.navigate('OnboardinScreen', { screen: 'Onboarding2' })}>
                     <FontAwesomeIcon icon={faChevronLeft} style={loginstayle.icon} size={25} />
@@ -66,7 +66,7 @@ const Login = ({ navigation }: any) => {
                 <Text style={loginstayle.text}>Login</Text>
             </View>
             <View style={loginstayle.inputview}>
-                <FontAwesomeIcon icon={faEnvelope} style={[loginstayle.icon1, hasContent1 && { color: '#199A8E' }]} size={25} />
+                <FontAwesomeIcon icon={faEnvelope} style={[loginstayle.icon1, hasContent1 && { color: '#FF7269' }]} size={25} />
                 <TextInput
                     onChangeText={handleEmailChange}
                     value={email}
@@ -74,11 +74,11 @@ const Login = ({ navigation }: any) => {
                     style={[loginstayle.input1, emaierror && { borderColor: 'red' }]}
                 />
                 <View>
-                    <FontAwesomeIcon icon={faLock} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' }]} size={25} />
+                    <FontAwesomeIcon icon={faLock} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
                     <TouchableOpacity onPress={togglePasswordVisibility} style={loginstayle.toucicon}>
                         {passwordVisible
-                            ? <FontAwesomeIcon icon={faEye} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' }]} size={25} />
-                            : <FontAwesomeIcon icon={faEyeSlash} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' }]} size={25} />
+                            ? <FontAwesomeIcon icon={faEye} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
+                            : <FontAwesomeIcon icon={faEyeSlash} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
                         }
                     </TouchableOpacity>
                     <TextInput
@@ -88,7 +88,7 @@ const Login = ({ navigation }: any) => {
                         secureTextEntry={!passwordVisible}
                         style={[loginstayle.input1, paswworderror && { borderColor: 'red' }]}
                     />
-                    <TouchableOpacity style={loginstayle.touc} onPress={() => navigation.navigate('Forgot')}>
+                    <TouchableOpacity style={loginstayle.touc}>
                         <Text style={loginstayle.text1}>Forgot Password?</Text>
                     </TouchableOpacity>
                 </View>

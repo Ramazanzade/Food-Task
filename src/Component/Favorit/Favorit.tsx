@@ -1,10 +1,11 @@
 import { View, Text, TextInput, TouchableOpacity, Modal, ActivityIndicator, Image, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect , useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFilter, faXmark, faHeart, faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import SelectDropdown from 'react-native-select-dropdown'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBasket, toggleFavorite } from '../../Store/Feature/fooddataSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import favoritcss from './favoritcss'
 import homecss from '../Home/homecss';
@@ -13,14 +14,31 @@ const Favorit = () => {
     const favoriteItems = useSelector((state: any) =>
     state.foodReducer.value.filter((item: any) => item.isFavorite)
   );
-    const data = useSelector((state: any) => state.foodReducer.value)
     const dispatch = useDispatch()
+    const [favorites, setFavorites] = useState([]);
+
     const handle = (data: any) => {
         dispatch(toggleFavorite(data.id))
     }
     const handle1 = (data: any) => {
         dispatch(toggleBasket(data.id))
     }
+    
+    useEffect(() => {
+        const saveFavoritesToStorage = async () => {
+          try {
+            await AsyncStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+          } catch (error) {
+            console.error('Error saving favorites to local storage:', error);
+          }
+        };
+    
+        saveFavoritesToStorage();
+      }, [favoriteItems]);
+    
+
+
+    
     const renderitem = (favoriteItems: any) => {
         return (
             <View style={homecss.flatlistview}>

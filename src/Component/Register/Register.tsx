@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft, faEnvelope, faLock, faEye, faEyeSlash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import loginstayle from '../Login/loginstayle';
+import { useDispatch } from 'react-redux';
+import { userregister } from '../../Store/Feature/LoginRegister/useraction';
+import { loginsucces } from '../../Store/Feature/LoginRegister/loginregisterSlice';
+import { AppDispatch } from '../../Store/store';
 const Register = ({ navigation }: any) => {
     const [email, setemail] = useState<any>('')
-    const [paswword, setpaswword] = useState<any>('')
+    const [password, setpaswword] = useState<any>('')
     const [name, setname] = useState<any>('')
     const [emaierror, seteamilerror] = useState(false)
     const [paswworderror, setpaswworderror] = useState(false)
@@ -19,14 +23,14 @@ const Register = ({ navigation }: any) => {
     const [selected, setselected] = useState(false)
     const [successModalVisible, setSuccessModalVisible] = useState(false);
     const [selectborde, setselectborde] = useState(false);
-    const [hasContent, setHasContent] = useState<any>(false); 
-    const [hasContent1, setHasContent1] = useState<any>(false); 
-    const [hasContent2, setHasContent2] = useState<any>(false); 
-
+    const [hasContent, setHasContent] = useState<any>(false);
+    const [hasContent1, setHasContent1] = useState<any>(false);
+    const [hasContent2, setHasContent2] = useState<any>(false);
+    const dispatch = useDispatch<AppDispatch>()
     const handlePasswordChange = (text: string) => {
         setpaswword(text);
         setpaswworderror(text.trim() == '')
-        setHasContent2(text.trim() !== ''); 
+        setHasContent2(text.trim() !== '');
 
     };
     const handleEmailChange = (text: string) => {
@@ -38,20 +42,30 @@ const Register = ({ navigation }: any) => {
     const hendleNameChange = (text: string) => {
         setname(text);
         setnameerror(text.trim() == '')
-        setHasContent(text.trim() !== ''); 
+        setHasContent(text.trim() !== '');
 
     };
-
-
-
-
     const handleToggleHideNumbers = () => {
         setHideNumbers(!hideNumbers);
         setHideText(!hideText);
     };
 
     const HandleSingup = () => {
-        if (selected || emaierror == email || paswworderror == paswword || nameerror == name) {
+        if (selected || emaierror == email || paswworderror == password || nameerror == name) {
+            const userdata = { name, password, email };
+            console.log(userdata)
+            dispatch(userregister(userdata))
+                .then((action: any) => {
+                    const responsePayload = action.payload;
+                    console.log('Registration successful:', responsePayload);
+                    dispatch(loginsucces(responsePayload));
+                    console.log(responsePayload);
+                    
+                })
+                .catch((error: any) => {
+                    console.error('Registration failed:', error);
+                    console.log(error);
+                });
             seteamilerror(true)
             setpaswworderror(true)
             setnameerror(true)
@@ -67,7 +81,7 @@ const Register = ({ navigation }: any) => {
         }
 
     };
-  
+
 
     const SuccessModal = () => {
         setLoading1(true);
@@ -90,7 +104,7 @@ const Register = ({ navigation }: any) => {
             </View>
             <View style={loginstayle.inputview}>
                 <View>
-                    <FontAwesomeIcon icon={faUser} style={[loginstayle.icon1, hasContent && { color: '#199A8E' } ]} size={25} />
+                    <FontAwesomeIcon icon={faUser} style={[loginstayle.icon1, hasContent && { color: '#FF7269' }]} size={25} />
                     <TextInput
                         onChangeText={hendleNameChange}
                         value={name}
@@ -99,7 +113,7 @@ const Register = ({ navigation }: any) => {
                     />
                 </View>
                 <View>
-                    <FontAwesomeIcon icon={faEnvelope} style={[loginstayle.icon1, hasContent1 && { color: '#199A8E' } ]} size={25} />
+                    <FontAwesomeIcon icon={faEnvelope} style={[loginstayle.icon1, hasContent1 && { color: '#FF7269' }]} size={25} />
                     <TextInput
                         onChangeText={handleEmailChange}
                         value={email}
@@ -108,24 +122,24 @@ const Register = ({ navigation }: any) => {
                     />
                 </View>
                 <View>
-                    <FontAwesomeIcon icon={faLock} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' } ]} size={25} />
+                    <FontAwesomeIcon icon={faLock} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
                     <TouchableOpacity onPress={handleToggleHideNumbers} style={loginstayle.toucicon}>
                         {hideNumbers
-                            ? <FontAwesomeIcon icon={faEye} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' }]} size={25} />
-                            : <FontAwesomeIcon icon={faEyeSlash} style={[loginstayle.icon1, hasContent2 && { color: '#199A8E' }]} size={25} />
+                            ? <FontAwesomeIcon icon={faEye} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
+                            : <FontAwesomeIcon icon={faEyeSlash} style={[loginstayle.icon1, hasContent2 && { color: '#FF7269' }]} size={25} />
                         }
                     </TouchableOpacity>
                     <TextInput
                         onChangeText={handlePasswordChange}
-                        value={hideText ? paswword.replace(/./g, '*') : paswword}
+                        value={hideText ? password.replace(/./g, '*') : password}
                         placeholder='Enter your password'
                         style={[loginstayle.input1, paswworderror && { borderColor: 'red' }]}
                     />
-                  
+
                 </View>
             </View>
             <View style={loginstayle.toucview}>
-                <TouchableOpacity style={loginstayle.touc1} onPress={HandleSingup} disabled={loading}>
+                <TouchableOpacity style={loginstayle.touc1} onPress={()=>HandleSingup()} disabled={loading}>
                     {loading ? (
                         <ActivityIndicator size='large' color="white" style={{ marginTop: '4%' }} />
                     ) : (

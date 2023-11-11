@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 const colors = { primary: '#282534', white: '#ffff' }
 export default StyleSheet.create({
     viewd: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#2C2F38',
         flex: 1
     },
     view: {
@@ -15,12 +15,12 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontSize: 25,
         fontWeight: '500',
-        color: '#101623',
+        color: 'gray',
         marginLeft: '35%',
         marginTop: -5
     },
     icon: {
-
+        color: 'gray'
     },
     inputview: {
         position: 'relative'
@@ -38,7 +38,7 @@ export default StyleSheet.create({
         fontSize: 20
     },
     input1: {
-        backgroundColor: '#F2F2F2',
+        backgroundColor: '#353842',
         borderWidth: 1,
         borderRadius: 30,
         borderColor: '#b7b8bc',
@@ -48,7 +48,7 @@ export default StyleSheet.create({
         marginTop: '5%',
         textAlign: 'left',
         paddingLeft: 65,
-        fontSize: 20,
+        fontSize: 15,
         marginBottom: 5
     },
     icon1: {
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     },
     text1: {
         textAlign: 'right',
-        color: '#199A8E'
+        color: '#FF7269'
     },
     touc: {
         marginRight: '7%'
@@ -74,19 +74,19 @@ export default StyleSheet.create({
     touc9: {
         display: 'flex',
         flexDirection: 'row',
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     text11: {
         width: '70%',
-        marginTop:'3%',
-        
+        marginTop: '3%',
+
     },
     toucview: {
 
     },
     touc1: {
         width: '90%',
-        backgroundColor: '#199A8E',
+        backgroundColor: '#FF7269',
         margin: '5%',
         borderRadius: 30,
         height: 65
@@ -98,7 +98,7 @@ export default StyleSheet.create({
         padding: 17
     },
     text3: {
-        color: '#199A8E',
+        color: '#FF7269',
         fontSize: 15
     },
     text4: {
@@ -151,9 +151,9 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginTop: '5%',
         fontWeight: '500',
-        color: '#101623',
-        fontSize: 20,
-        marginLeft: '8%'
+        color: 'gray',
+        fontSize: 15,
+        marginLeft: '6%'
     },
     touc2: {
         display: 'flex',
@@ -166,7 +166,7 @@ export default StyleSheet.create({
         height: 65,
         marginTop: '7%'
     },
-    touc10:{
+    touc10: {
         display: 'flex',
         flexDirection: 'row',
         borderColor: '#b7b8bc',
@@ -179,7 +179,7 @@ export default StyleSheet.create({
     },
     modal: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#353842',
         width: '80%',
         borderRadius: 20,
         height: '60%',
@@ -190,7 +190,7 @@ export default StyleSheet.create({
         marginTop: '18%'
     },
     icon3: {
-        color: '#199A8E',
+        color: '#FF7269',
         alignItems: 'center',
         alignSelf: 'center',
         marginTop: '25%'
@@ -209,7 +209,7 @@ export default StyleSheet.create({
     text7: {
         fontSize: 20,
         fontWeight: '600',
-        color: '#101623',
+        color: 'gray',
     },
     text8: {
         width: 240,
@@ -223,7 +223,7 @@ export default StyleSheet.create({
         color: '#ffffff',
         fontSize: 20,
         textAlign: 'center',
-        marginTop: '9%'
+        marginTop: '5%'
     },
     text10: {
         width: 245,
@@ -231,7 +231,7 @@ export default StyleSheet.create({
         paddingLeft: 20
     },
     touc3: {
-        backgroundColor: '#199A8E',
+        backgroundColor: '#FF7269',
         width: 170,
         height: 60,
         borderRadius: 20,
@@ -243,8 +243,8 @@ export default StyleSheet.create({
         borderRadius: 20,
         borderWidth: 10
     },
-    text12:{
-        color:'#199A8E'
+    text12: {
+        color: '#199A8E'
     }
 
 })
