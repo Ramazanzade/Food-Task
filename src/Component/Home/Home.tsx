@@ -14,7 +14,7 @@ const Home = ({navigation}:any) => {
     const [search, setsearch] = useState('')
     const [modalVisible, setModalVisible] = useState(false);
     const [price, setprice] = useState('')
-    const food = ["Egypt", "Canada", "Australia", "Ireland"]
+    const food = ["Pizza", "Hanburger", "Spagetdi"]
     const [loading, setLoading] = useState(false);
 
     const openModal = () => {
