@@ -17,8 +17,8 @@ const Basket = ({ initialQuantity }: any) => {
     const [loading, setLoading] = useState(false);
     const [loading1, setLoading1] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-    const [cardNumber, setCardNumber] = useState<any>('');
-    const [expirationDate, setExpirationDate] = useState<any>('');
+    const [cardNumber, setCardNumber] = useState<any>();
+    const [expirationDate, setExpirationDate] = useState<any>();
     const [cvv, setCvv] = useState<any>('');
     const [cardNumbererror, setCardNumbererror] = useState(false);
     const [expirationDateerror, setExpirationDateerror] = useState(false)
