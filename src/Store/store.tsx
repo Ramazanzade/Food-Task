@@ -1,14 +1,16 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { foodReducer } from "./Feature/fooddataSlice";
 import { OnboardingReducer } from "./Feature/onboardingslice";
-import { LoginRegisterreducer } from "./Feature/LoginRegister/loginregisterSlice";
-
+import  authReducer  from "./Feature/LoginRegister/loginregisterSlice";
+import messageReducer from './Feature/LoginRegister/message'
 
   
 const rootReducers = combineReducers({
     foodReducer,
     OnboardingReducer,
-    LoginRegisterreducer
+    authReducer,
+    messageReducer
+
 
 })
 

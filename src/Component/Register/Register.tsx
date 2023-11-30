@@ -4,17 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft, faEnvelope, faLock, faEye, faEyeSlash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import loginstayle from '../Login/loginstayle';
-import { useDispatch } from 'react-redux';
-import { userregister } from '../../Store/Feature/LoginRegister/useraction';
-import { loginsucces } from '../../Store/Feature/LoginRegister/loginregisterSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../Store/store';
+import { clearMessage } from '../../Store/Feature/LoginRegister/message';
+import { register } from '../../Store/Feature/LoginRegister/loginregisterSlice';
 const Register = ({ navigation }: any) => {
     const [email, setemail] = useState<any>('')
     const [password, setpaswword] = useState<any>('')
-    const [name, setname] = useState<any>('')
+    const [username, setusername] = useState<any>('')
     const [emaierror, seteamilerror] = useState(false)
     const [paswworderror, setpaswworderror] = useState(false)
-    const [nameerror, setnameerror] = useState(false)
+    const [usernameerror, setusernameerror] = useState(false)
     const [hideNumbers, setHideNumbers] = useState(false);
     const [hideText, setHideText] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -39,9 +39,9 @@ const Register = ({ navigation }: any) => {
         setHasContent1(text.trim() !== '');
 
     };
-    const hendleNameChange = (text: string) => {
-        setname(text);
-        setnameerror(text.trim() == '')
+    const hendleusernameChange = (text: string) => {
+        setusername(text);
+        setusernameerror(text.trim() == '')
         setHasContent(text.trim() !== '');
 
     };
@@ -49,18 +49,23 @@ const Register = ({ navigation }: any) => {
         setHideNumbers(!hideNumbers);
         setHideText(!hideText);
     };
-
+    const { message } = useSelector((state: any) => state.messageReducer.value)
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch]);
+    const initialValues = {
+        userusername: "",
+        email: "",
+        password: "",
+    };
     const HandleSingup = () => {
-        if (selected || emaierror == email || paswworderror == password || nameerror == name) {
-            const userdata = { name, password, email };
+        if (selected || emaierror == email || paswworderror == password || usernameerror == username) {
+            const userdata = { username, password, email };
             console.log(userdata)
-            dispatch(userregister(userdata))
+            dispatch(register(userdata))
                 .then((action: any) => {
                     const responsePayload = action.payload;
                     console.log('Registration successful:', responsePayload);
-                    dispatch(loginsucces(responsePayload));
-                    console.log(responsePayload);
-                    
                 })
                 .catch((error: any) => {
                     console.error('Registration failed:', error);
@@ -68,7 +73,7 @@ const Register = ({ navigation }: any) => {
                 });
             seteamilerror(true)
             setpaswworderror(true)
-            setnameerror(true)
+            setusernameerror(true)
             setselectborde(true)
 
         } else {
@@ -106,10 +111,10 @@ const Register = ({ navigation }: any) => {
                 <View>
                     <FontAwesomeIcon icon={faUser} style={[loginstayle.icon1, hasContent && { color: '#FF7269' }]} size={25} />
                     <TextInput
-                        onChangeText={hendleNameChange}
-                        value={name}
-                        placeholder='Enter your name'
-                        style={[loginstayle.input1, nameerror && { borderColor: 'red' }]}
+                        onChangeText={hendleusernameChange}
+                        value={username}
+                        placeholder='Enter your username'
+                        style={[loginstayle.input1, usernameerror && { borderColor: 'red' }]}
                     />
                 </View>
                 <View>
@@ -139,7 +144,7 @@ const Register = ({ navigation }: any) => {
                 </View>
             </View>
             <View style={loginstayle.toucview}>
-                <TouchableOpacity style={loginstayle.touc1} onPress={()=>HandleSingup()} disabled={loading}>
+                <TouchableOpacity style={loginstayle.touc1} onPress={() => HandleSingup()} disabled={loading}>
                     {loading ? (
                         <ActivityIndicator size='large' color="white" style={{ marginTop: '4%' }} />
                     ) : (
